@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://3ffmxjiels24"]
+
+[ext_resource type="Texture2D" uid="uid://bxgpi6gft2wf5" path="res://Resources/Sprites/bulletPlayer.png" id="1_a6j5b"]
+[ext_resource type="Script" uid="uid://bjpvxmeyiasna" path="res://Resources/Scripts/PlayerBullet.cs" id="1_twhka"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e2jdn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a6j5b")
+}],
+"loop": true,
+"name": &"PlayerBullet",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hv5ql"]
+radius = 18.0
+height = 86.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6j5b"]
+size = Vector2(43, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twhka"]
+size = Vector2(38.3783, 12.5084)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vtpug"]
+size = Vector2(38.3876, 14.6582)
+
+[node name="PlayerBullet" type="Area2D"]
+script = ExtResource("1_twhka")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e2jdn")
+animation = &"PlayerBullet"
+
+[node name="CollisionShape2D_BODY" type="CollisionShape2D" parent="."]
+position = Vector2(19, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hv5ql")
+
+[node name="CollisionShape2D2_TAIL" type="CollisionShape2D" parent="."]
+position = Vector2(-39.5, -1.5)
+shape = SubResource("RectangleShape2D_a6j5b")
+
+[node name="CollisionShape2D_LEFT" type="CollisionShape2D" parent="."]
+position = Vector2(-31, -19)
+rotation = 0.359538
+shape = SubResource("RectangleShape2D_twhka")
+
+[node name="CollisionShape2D_RIGHT" type="CollisionShape2D" parent="."]
+position = Vector2(-31, 17)
+rotation = -0.359538
+shape = SubResource("RectangleShape2D_vtpug")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfaxp46yiq8vc"]
+
+[ext_resource type="Texture2D" uid="uid://dg6clnuqietnm" path="res://Resources/Sprites/cannon.png" id="1_qlvt6"]
+[ext_resource type="Texture2D" uid="uid://bk6oe86xrrexc" path="res://Resources/Sprites/cannonBarrel.png" id="2_3uv2y"]
+[ext_resource type="Script" uid="uid://da86yorxson05" path="res://Resources/Scripts/PlayerCannon.cs" id="2_g3x0m"]
+[ext_resource type="Script" uid="uid://53o5mcxv3kel" path="res://Resources/Scenes/PlayerCannonBarrel.cs" id="3_ddoki"]
+
+[node name="Cannon" type="Sprite2D"]
+texture = ExtResource("1_qlvt6")
+script = ExtResource("2_g3x0m")
+
+[node name="CannonBarrel" type="Sprite2D" parent="."]
+position = Vector2(8, -142)
+rotation = 3.14159
+scale = Vector2(1.001, 1)
+texture = ExtResource("2_3uv2y")
+script = ExtResource("3_ddoki")

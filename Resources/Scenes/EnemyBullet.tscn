@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6ygnp4py56po"]
+
+[ext_resource type="Script" uid="uid://de7op2xyf2tqw" path="res://Resources/Scripts/EnemyBullet.cs" id="1_etdp5"]
+[ext_resource type="Texture2D" uid="uid://dfqv8ei6vy4a2" path="res://Resources/Sprites/bulletEnemy.png" id="1_qb50g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kth10"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qb50g")
+}],
+"loop": true,
+"name": &"EnemyBullet",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qb50g"]
+radius = 26.0
+height = 150.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_etdp5"]
+size = Vector2(28, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dg8k0"]
+size = Vector2(28, 20)
+
+[node name="EnemyBullet" type="Area2D"]
+script = ExtResource("1_etdp5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, 0)
+sprite_frames = SubResource("SpriteFrames_kth10")
+animation = &"EnemyBullet"
+
+[node name="CollisionShape2D_BODY" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_qb50g")
+
+[node name="CollisionShape2D2_LEFTWING" type="CollisionShape2D" parent="."]
+position = Vector2(-50, -34)
+shape = SubResource("RectangleShape2D_etdp5")
+
+[node name="CollisionShape2D_RIGHTWING" type="CollisionShape2D" parent="."]
+position = Vector2(-50, 36)
+shape = SubResource("RectangleShape2D_dg8k0")
