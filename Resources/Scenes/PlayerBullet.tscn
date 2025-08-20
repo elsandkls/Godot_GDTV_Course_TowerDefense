@@ -27,28 +27,30 @@ size = Vector2(38.3783, 12.5084)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtpug"]
 size = Vector2(38.3876, 14.6582)
 
-[node name="PlayerBullet" type="Area2D"]
+[node name="Node2D" type="Node2D"]
 script = ExtResource("1_twhka")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="PlayerBullet" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerBullet"]
 sprite_frames = SubResource("SpriteFrames_e2jdn")
 animation = &"PlayerBullet"
 
-[node name="CollisionShape2D_BODY" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D_BODY" type="CollisionShape2D" parent="PlayerBullet"]
 position = Vector2(19, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_hv5ql")
 
-[node name="CollisionShape2D2_TAIL" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D2_TAIL" type="CollisionShape2D" parent="PlayerBullet"]
 position = Vector2(-39.5, -1.5)
 shape = SubResource("RectangleShape2D_a6j5b")
 
-[node name="CollisionShape2D_LEFT" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D_LEFT" type="CollisionShape2D" parent="PlayerBullet"]
 position = Vector2(-31, -19)
 rotation = 0.359538
 shape = SubResource("RectangleShape2D_twhka")
 
-[node name="CollisionShape2D_RIGHT" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D_RIGHT" type="CollisionShape2D" parent="PlayerBullet"]
 position = Vector2(-31, 17)
 rotation = -0.359538
 shape = SubResource("RectangleShape2D_vtpug")

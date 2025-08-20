@@ -3,8 +3,12 @@ using System;
 
 public partial class PlayerExplosion : Area2D
 {
+    private int debug = 0;
     public override void _Ready()
     {
-        GD.Print("Hello World Player Explosion");
+        if (debug == 1)
+        {
+            GD.Print(" Player Explosion");
+        }
     }  
 }

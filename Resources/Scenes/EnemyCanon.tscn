@@ -1,15 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1jsiexoklrfq"]
+[gd_scene load_steps=5 format=3 uid="uid://b1jsiexoklrfq"]
 
 [ext_resource type="Texture2D" uid="uid://dg6clnuqietnm" path="res://Resources/Sprites/cannon.png" id="1_26lgn"]
 [ext_resource type="Texture2D" uid="uid://bk6oe86xrrexc" path="res://Resources/Sprites/cannonBarrel.png" id="2_mi1sh"]
-[ext_resource type="Script" uid="uid://ctfgce2wksdso" path="res://Resources/Scenes/EnemyCannonBarrel.cs" id="3_mi1sh"]
+[ext_resource type="Script" uid="uid://e7hsgremyluw" path="res://Resources/Scripts/EnemyCannon.cs" id="2_shpwe"]
+[ext_resource type="Script" uid="uid://ctfgce2wksdso" path="res://Resources/Scripts/EnemyCannonBarrel.cs" id="3_mi1sh"]
 
 [node name="EnemyCanon" type="Node2D"]
 
-[node name="Sprite_Cannon" type="Sprite2D" parent="."]
+[node name="EnemyCannon" type="Sprite2D" parent="."]
 texture = ExtResource("1_26lgn")
+script = ExtResource("2_shpwe")
 
-[node name="Sprite_Barrel" type="Sprite2D" parent="Sprite_Cannon"]
-position = Vector2(13, -146)
+[node name="EnemyCannonBarrel" type="Sprite2D" parent="EnemyCannon"]
+position = Vector2(3, -73)
 texture = ExtResource("2_mi1sh")
+offset = Vector2(99, 1)
 script = ExtResource("3_mi1sh")

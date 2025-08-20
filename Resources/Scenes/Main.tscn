@@ -1,11 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://bn7jqrg1nkl22"]
+[gd_scene load_steps=15 format=3 uid="uid://bn7jqrg1nkl22"]
 
 [ext_resource type="Script" uid="uid://cg1rwcmjausin" path="res://Resources/Scripts/Main.cs" id="1_r150o"]
 [ext_resource type="Texture2D" uid="uid://dukdkohwd565v" path="res://Resources/TileMaps/tileMapStars.png" id="2_vn1xt"]
 [ext_resource type="Texture2D" uid="uid://yw7nxh045xsf" path="res://Resources/TileMaps/tileMapGround.png" id="3_0oyik"]
 [ext_resource type="PackedScene" uid="uid://cfaxp46yiq8vc" path="res://Resources/Scenes/PlayerCannon.tscn" id="4_pmlvw"]
 [ext_resource type="Script" uid="uid://brooempdkrjv5" path="res://Resources/Scripts/BulletBrain.cs" id="5_3v2sg"]
+[ext_resource type="PackedScene" uid="uid://b1jsiexoklrfq" path="res://Resources/Scenes/EnemyCanon.tscn" id="5_702yn"]
 [ext_resource type="Texture2D" uid="uid://dcnmjlw68ye7s" path="res://Resources/Sprites/gameOverOverlay.png" id="5_flq7x"]
+[ext_resource type="Script" uid="uid://8s2wqvyookfo" path="res://Resources/Scripts/ExplosionBrain.cs" id="6_hv5ql"]
+[ext_resource type="Script" uid="uid://cm428wc88aqmj" path="res://Resources/Scripts/EnemySpawnerTimer.cs" id="7_gpord"]
+[ext_resource type="Script" uid="uid://loo42ute1h48" path="res://Resources/Scripts/Scenes.cs" id="8_7m8rt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_flq7x"]
 texture = ExtResource("2_vn1xt")
@@ -42,13 +46,26 @@ layer_0/tile_data = PackedInt32Array(131073, 0, 0, 131072, 0, 0, 196607, 0, 0)
 
 [node name="Foreground" type="Node" parent="."]
 
-[node name="Cannon" parent="Foreground" instance=ExtResource("4_pmlvw")]
-position = Vector2(209, 830)
+[node name="EnemyCanon" parent="Foreground" instance=ExtResource("5_702yn")]
+position = Vector2(1701, 871)
+
+[node name="PlayerCannon" parent="Foreground" instance=ExtResource("4_pmlvw")]
+position = Vector2(80, 853)
+
+[node name="Explosions" type="Node" parent="."]
+
+[node name="ExplosionBrain" type="Node" parent="Explosions"]
+script = ExtResource("6_hv5ql")
 
 [node name="Bullets" type="Node" parent="."]
 
 [node name="BulletBrain" type="Node" parent="Bullets"]
 script = ExtResource("5_3v2sg")
+
+[node name="enemySpawner" type="Timer" parent="Bullets/BulletBrain"]
+wait_time = 3.0
+autostart = true
+script = ExtResource("7_gpord")
 
 [node name="Hud" type="Node" parent="."]
 
@@ -58,3 +75,8 @@ offset_top = -316.0
 offset_right = 2098.0
 offset_bottom = -18.0
 texture = ExtResource("5_flq7x")
+
+[node name="Scenes" type="Node" parent="."]
+script = ExtResource("8_7m8rt")
+
+[connection signal="timeout" from="Bullets/BulletBrain/enemySpawner" to="Bullets/BulletBrain/enemySpawner" method="_on_timeout"]
