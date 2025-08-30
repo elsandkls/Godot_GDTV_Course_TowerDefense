@@ -5,42 +5,72 @@ public partial class ExplosionBrain : Node
 {
     Scenes scenes;
     private int debug = 0;
+
+    private string ClassName = "ExplosionBrain";
+
     public override void _Ready()
     {
+        string func_name = "_Ready";
         scenes = GetNode<Scenes>("/root/Main/Scenes");
+        if (debug == 1)
+        {
+            GD.Print(ClassName + " [" + func_name + "] ");
+        }
     }
-    
+
     //public PackedScene _scenePlayerExplosion = (PackedScene)GD.Load("res://Resources/Scenes/PlayerExplosion.tscn");
     public void SpawnPlayerExplosion(Vector2 SpawnPosition)
     {
+        string func_name = "SpawnPlayerExplosion";
         if (debug == 1)
         {
-            GD.Print("SpawnPlayerExplosion:SpawnPosition " + SpawnPosition);
+            GD.Print(ClassName + " [" + func_name + "]  SpawnPosition " + SpawnPosition);
         }
-        PlayerExplosion explosion = scenes._scenePlayerExplosion.Instantiate<PlayerExplosion>();
-        GetNode<Node>("/root/Main/Explosion").AddChild(explosion);
-        explosion.GlobalPosition = SpawnPosition;
+        //Spawn potionsion 
+        var explosion = scenes._scenePlayerExplosion.Instantiate<PlayerExplosion>();
+        //GetNode<Node>("/root/Main/Explosions").AddChild(explosion);
 
-        // Set Explosion Animation
-        var explosionSprite = (AnimatedSprite2D)explosion.GetNode("AnimatedSprite2D");
-        explosionSprite.Play("PlayerExplosion");
+        GetNode<Node>("/root/Main/Explosions").CallDeferred(Node.MethodName.AddChild, explosion);
+        explosion.GlobalPosition = SpawnPosition;
+        // Set Bullet Animation  ;
+        explosion.PlayAnimationForMe();
     }
 
     // public PackedScene _sceneEnemyExplosion = (PackedScene)GD.Load("res://Resources/Scenes/EnemyExplosion.tscn");
     public void SpawnEnemyExplosion(Vector2 SpawnPosition)
     {
+        string func_name = "SpawnEnemyExplosion";
         if (debug == 1)
         {
-            GD.Print("SpawnEnemyExplosion:SpawnPosition " + SpawnPosition);
+            GD.Print(ClassName + " [" + func_name + "]  SpawnPosition " + SpawnPosition);
         }
-        //var explosion = (explosion)scenes._sceneEnemyExplosion.Instance();
-            EnemyExplosion explosion = scenes._sceneEnemyExplosion.Instantiate<EnemyExplosion>();
-        GetNode<Node>("/root/Main/Explosion").AddChild(explosion);
+        //Spawn potionsion 
+        var explosion = scenes._sceneEnemyExplosion.Instantiate<EnemyExplosion>();
+        GetNode<Node>("/root/Main/Explosions").AddChild(explosion);
         explosion.GlobalPosition = SpawnPosition;
-
-        // Set Explosion Animation
-        var explosionSprite = (AnimatedSprite2D)explosion.GetNode("AnimatedSprite2D");
-        explosionSprite.Play("PlayerExplosion");
-
+        // Set Bullet Animation  ;
+        explosion.PlayAnimationForMe();
     }
+    
+    
+    public void _on_timer_timeout()
+    {
+        string func_name = "_on_timer_timeout";
+        if (debug == 1)
+        {
+            GD.Print(ClassName + " [" + func_name + "] ");
+        }
+        SelfDelete();
+    }
+
+    public void SelfDelete()
+    {
+        string func_name = "SelfDelete";
+        if (debug == 1)
+        {
+            GD.Print(ClassName + " [" + func_name + "] ");
+        }
+        QueueFree();
+    }
+
 }

@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://duergthlw4ieu"]
+
+[ext_resource type="Texture2D" uid="uid://bhh13lnc0eivu" path="res://Resources/Sprites/bulletStopper.png" id="1_5hubl"]
+[ext_resource type="Script" uid="uid://2k7dadsy8h31" path="res://Resources/Scripts/EnemyStopper.cs" id="1_enwxk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_enwxk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5hubl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8bq7q"]
+radius = 65.0692
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_enwxk")
+
+[node name="EnemyStopper" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="EnemyStopper"]
+sprite_frames = SubResource("SpriteFrames_enwxk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStopper"]
+shape = SubResource("CircleShape2D_8bq7q")

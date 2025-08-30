@@ -33,7 +33,7 @@ animations = [{
 "texture": ExtResource("1_kmpaf")
 }],
 "loop": true,
-"name": &"PlayerExplosion",
+"name": &"default",
 "speed": 5.0
 }]
 
@@ -45,9 +45,15 @@ script = ExtResource("1_178t2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fg7hx")
-animation = &"PlayerExplosion"
-frame = 1
-frame_progress = 0.77354
+frame_progress = 0.0492726
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_adknj")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished" flags=6]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

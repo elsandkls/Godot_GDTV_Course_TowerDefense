@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://3ffmxjiels24"]
+[gd_scene load_steps=9 format=3 uid="uid://3ffmxjiels24"]
 
 [ext_resource type="Texture2D" uid="uid://bxgpi6gft2wf5" path="res://Resources/Sprites/bulletPlayer.png" id="1_a6j5b"]
 [ext_resource type="Script" uid="uid://bjpvxmeyiasna" path="res://Resources/Scripts/PlayerBullet.cs" id="1_twhka"]
+[ext_resource type="Script" uid="uid://yt6pkvjqn42x" path="res://Resources/Scripts/PlayerBulletArea2D.cs" id="2_vtpug"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e2jdn"]
 animations = [{
@@ -10,7 +11,7 @@ animations = [{
 "texture": ExtResource("1_a6j5b")
 }],
 "loop": true,
-"name": &"PlayerBullet",
+"name": &"default",
 "speed": 5.0
 }]
 
@@ -31,10 +32,10 @@ size = Vector2(38.3876, 14.6582)
 script = ExtResource("1_twhka")
 
 [node name="PlayerBullet" type="Area2D" parent="."]
+script = ExtResource("2_vtpug")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerBullet"]
 sprite_frames = SubResource("SpriteFrames_e2jdn")
-animation = &"PlayerBullet"
 
 [node name="CollisionShape2D_BODY" type="CollisionShape2D" parent="PlayerBullet"]
 position = Vector2(19, -1)
@@ -54,3 +55,9 @@ shape = SubResource("RectangleShape2D_twhka")
 position = Vector2(-31, 17)
 rotation = -0.359538
 shape = SubResource("RectangleShape2D_vtpug")
+
+[node name="Timer" type="Timer" parent="PlayerBullet"]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="PlayerBullet/Timer" to="." method="_on_timer_timeout"]
