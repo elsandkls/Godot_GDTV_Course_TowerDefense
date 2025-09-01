@@ -57,7 +57,7 @@ public partial class PlayerStopperArea : Area2D
         
         if (Bullet.Name == "EnemyBullet")
         {
-            ExplosionBrain.SpawnPlayerExplosion(GlobalPosition);
+            ExplosionBrain.SpawnEnemyExplosion(GlobalPosition);
             // disable collisions
             var BulletArea2dPath = Bullet.GetPath();
             EnemyBulletArea2D = (EnemyBulletArea2D)GetNode(BulletArea2dPath);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bn7jqrg1nkl22"]
+[gd_scene load_steps=18 format=4 uid="uid://bn7jqrg1nkl22"]
 
 [ext_resource type="Script" uid="uid://cg1rwcmjausin" path="res://Resources/Scripts/Main.cs" id="1_r150o"]
 [ext_resource type="Texture2D" uid="uid://dukdkohwd565v" path="res://Resources/TileMaps/tileMapStars.png" id="2_vn1xt"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://brooempdkrjv5" path="res://Resources/Scripts/BulletBrain.cs" id="5_3v2sg"]
 [ext_resource type="PackedScene" uid="uid://b1jsiexoklrfq" path="res://Resources/Scenes/EnemyCanon.tscn" id="5_702yn"]
 [ext_resource type="Texture2D" uid="uid://dcnmjlw68ye7s" path="res://Resources/Sprites/gameOverOverlay.png" id="5_flq7x"]
+[ext_resource type="Script" uid="uid://buevqo1acc2lv" path="res://Resources/Scripts/GroundArea.cs" id="6_2aak1"]
 [ext_resource type="Script" uid="uid://8s2wqvyookfo" path="res://Resources/Scripts/ExplosionBrain.cs" id="6_hv5ql"]
 [ext_resource type="Script" uid="uid://xyscer3pb7o7" path="res://Resources/Scripts/StopperBrain.cs" id="7_e2jdn"]
 [ext_resource type="Script" uid="uid://cm428wc88aqmj" path="res://Resources/Scripts/EnemySpawnerTimer.cs" id="7_gpord"]
@@ -30,6 +31,9 @@ texture_region_size = Vector2i(1024, 400)
 tile_size = Vector2i(1024, 400)
 sources/0 = SubResource("TileSetAtlasSource_kth10")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kth10"]
+size = Vector2(1919, 150)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r150o")
 
@@ -49,7 +53,15 @@ tile_set = SubResource("TileSet_pf0mt")
 position = Vector2(1739, 859)
 
 [node name="PlayerCannon" parent="Foreground" instance=ExtResource("4_pmlvw")]
-position = Vector2(93, 1010)
+position = Vector2(175, 902)
+
+[node name="GroundArea" type="Area2D" parent="Foreground"]
+position = Vector2(880, 974)
+script = ExtResource("6_2aak1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/GroundArea"]
+position = Vector2(80.5, 127)
+shape = SubResource("RectangleShape2D_kth10")
 
 [node name="Explosions" type="Node" parent="."]
 
@@ -74,13 +86,14 @@ script = ExtResource("7_gpord")
 [node name="Hud" type="Node" parent="."]
 
 [node name="TextRect_Hud" type="TextureRect" parent="Hud"]
-offset_left = -331.0
-offset_top = -188.0
-offset_right = 2101.0
-offset_bottom = 110.0
+offset_left = -6.0
+offset_top = -110.0
+offset_right = 2060.0
+offset_bottom = 188.0
 texture = ExtResource("5_flq7x")
 
 [node name="Scenes" type="Node" parent="."]
 script = ExtResource("8_7m8rt")
 
+[connection signal="area_entered" from="Foreground/GroundArea" to="Foreground/GroundArea" method="_on_ground_area_entered"]
 [connection signal="timeout" from="Bullets/BulletBrain/enemySpawner" to="Bullets/BulletBrain/enemySpawner" method="_on_timeout"]

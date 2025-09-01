@@ -46,31 +46,10 @@ public partial class ExplosionBrain : Node
         }
         //Spawn potionsion 
         var explosion = scenes._sceneEnemyExplosion.Instantiate<EnemyExplosion>();
-        GetNode<Node>("/root/Main/Explosions").AddChild(explosion);
+        GetNode<Node>("/root/Main/Explosions").CallDeferred(Node.MethodName.AddChild, explosion); 
         explosion.GlobalPosition = SpawnPosition;
         // Set Bullet Animation  ;
         explosion.PlayAnimationForMe();
     }
     
-    
-    public void _on_timer_timeout()
-    {
-        string func_name = "_on_timer_timeout";
-        if (debug == 1)
-        {
-            GD.Print(ClassName + " [" + func_name + "] ");
-        }
-        SelfDelete();
-    }
-
-    public void SelfDelete()
-    {
-        string func_name = "SelfDelete";
-        if (debug == 1)
-        {
-            GD.Print(ClassName + " [" + func_name + "] ");
-        }
-        QueueFree();
-    }
-
 }

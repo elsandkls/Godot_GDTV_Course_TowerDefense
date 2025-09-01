@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfaxp46yiq8vc"]
+[gd_scene load_steps=7 format=3 uid="uid://cfaxp46yiq8vc"]
 
 [ext_resource type="Texture2D" uid="uid://dg6clnuqietnm" path="res://Resources/Sprites/cannon.png" id="1_qlvt6"]
 [ext_resource type="Texture2D" uid="uid://bk6oe86xrrexc" path="res://Resources/Sprites/cannonBarrel.png" id="2_3uv2y"]
 [ext_resource type="Script" uid="uid://da86yorxson05" path="res://Resources/Scripts/PlayerCannon.cs" id="2_g3x0m"]
 [ext_resource type="Script" uid="uid://53o5mcxv3kel" path="res://Resources/Scripts/PlayerCannonBarrel.cs" id="3_ddoki"]
+[ext_resource type="Script" uid="uid://rqklixkgl86s" path="res://Resources/Scripts/PlayerArea.cs" id="5_oxmq8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g3x0m"]
+radius = 111.0
+height = 358.0
 
 [node name="Node2D" type="Node2D"]
 
@@ -16,3 +21,12 @@ position = Vector2(2, -61)
 texture = ExtResource("2_3uv2y")
 offset = Vector2(100.388, 3.85284)
 script = ExtResource("3_ddoki")
+
+[node name="PlayerArea" type="Area2D" parent="PlayerCannon"]
+script = ExtResource("5_oxmq8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCannon/PlayerArea"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_g3x0m")
+
+[connection signal="area_entered" from="PlayerCannon/PlayerArea" to="PlayerCannon/PlayerArea" method="_on_area_entered"]
