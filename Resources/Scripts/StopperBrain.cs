@@ -6,6 +6,9 @@ public partial class StopperBrain : Node
     private string ClassName = "StopperBrain";
     Scenes scenes;
     private int debug = 0;
+    
+    public int PlayerStopperCount = 0;
+    public int EnemyStopperCount = 0;
     public override void _Ready()
     {
         string func_name = "_Ready";
@@ -24,15 +27,13 @@ public partial class StopperBrain : Node
         {
             GD.Print(ClassName + " [" + func_name + "] SpawnPosition " + SpawnPosition);
         }
-        //PlayerStopper stopper = scenes._scenePlayerStopper.Instantiate<PlayerStopper>();
-        //GetNode<Node>("/root/Main/BulletStopper").AddChild(stopper);
-        //stopper.GlobalPosition = SpawnPosition;
 
         var stopper = scenes._scenePlayerStopper.Instantiate<PlayerStopper>();
         GetNode<Node>("/root/Main/BulletStopper").AddChild(stopper);
         stopper.GlobalPosition = SpawnPosition;
         // Set Bullet Animation  ;
         stopper.PlayAnimationForMe();
+        PlayerStopperCount++;
     }
 
     // public PackedScene _sceneEnemyStopper = (PackedScene)GD.Load("res://Resources/Scenes/EnemyStopper.tscn");
@@ -43,17 +44,13 @@ public partial class StopperBrain : Node
         {
             GD.Print(ClassName + " [" + func_name + "] SpawnPosition " + SpawnPosition);
         }
-        //EnemyStopper stopper = scenes._sceneEnemyStopper.Instantiate<EnemyStopper>();
-        //GetNode<Node>("/root/Main/BulletStopper").AddChild(stopper);
-        //stopper.GlobalPosition = SpawnPosition;
 
         var stopper = scenes._sceneEnemyStopper.Instantiate<EnemyStopper>();
         GetNode<Node>("/root/Main/BulletStopper").AddChild(stopper);
         stopper.GlobalPosition = SpawnPosition;
         // Set Bullet Animation  ;
         stopper.PlayAnimationForMe();
-
+        EnemyStopperCount++;
     }
-     
-
+    
 }

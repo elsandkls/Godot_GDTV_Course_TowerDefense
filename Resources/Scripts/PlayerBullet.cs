@@ -9,6 +9,8 @@ public partial class PlayerBullet : Node2D
     private int debug =0;
     public AnimatedSprite2D ThisSprite { get; private set; } 
     private string ThisAnimation = "";
+    PlayerCannon PlayerCannon;
+    BulletBrain BulletBrain;
 
 
     public override void _Ready()
@@ -19,6 +21,8 @@ public partial class PlayerBullet : Node2D
             GD.Print(ClassName + "[" + func_name + "]");
         }
         SetProcess(true);
+        PlayerCannon = (PlayerCannon)GetNode("/root/Main/Foreground/PlayerCannon");
+        BulletBrain = (BulletBrain)GetNode("/root/Main/Bullets/BulletBrain"); 
         ThisSprite = GetNode<AnimatedSprite2D>("PlayerBullet/AnimatedSprite2D");
         foreach (var animName in ThisSprite.SpriteFrames.GetAnimationNames())
         {
@@ -79,6 +83,8 @@ public partial class PlayerBullet : Node2D
         if (PositionTest == true)
         {
             SelfDelete();
+            PlayerCannon.canShoot = true;
+            BulletBrain.PlayerBulletCount--;
         }
     }
 

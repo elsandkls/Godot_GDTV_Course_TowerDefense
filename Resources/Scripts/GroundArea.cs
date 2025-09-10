@@ -12,6 +12,7 @@ public partial class GroundArea : Area2D
     PlayerBulletArea2D PlayerBulletArea2D; 
     EnemyBullet EnemyBullet;
     EnemyBulletArea2D EnemyBulletArea2D;
+    PlayerCannon PlayerCannon;
     public override void _Ready()
     {
         string func_name = "_Ready";
@@ -22,6 +23,7 @@ public partial class GroundArea : Area2D
         SetProcess(true);        
         BulletBrain = (BulletBrain)GetNode("/root/Main/Bullets/BulletBrain");
         ExplosionBrain = (ExplosionBrain)GetNode("/root/Main/Explosions/ExplosionBrain");    
+        PlayerCannon = (PlayerCannon)GetNode("/root/Main/Foreground/PlayerCannon");
     }
     public void _on_ground_area_entered(Area2D Bullet)
     {
@@ -45,6 +47,7 @@ public partial class GroundArea : Area2D
             ExplosionBrain.SpawnPlayerExplosion(PlayerBullet.GlobalPosition);
 
             PlayerBullet.SelfDelete(); 
+            PlayerCannon.canShoot = true;
         }
         
         if (Bullet.Name == "EnemyBullet")

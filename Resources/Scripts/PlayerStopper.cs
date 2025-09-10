@@ -5,7 +5,7 @@ public partial class PlayerStopper : Node2D
 {
     private string ClassName = "PlayerStopper";
     Scenes scenes;
-    private int debug = 0;
+    private int debug = 1;
     public AnimatedSprite2D ThisSprite { get; private set; }
     private string ThisAnimation = "";
 

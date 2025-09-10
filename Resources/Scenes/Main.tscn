@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=4 uid="uid://bn7jqrg1nkl22"]
+[gd_scene load_steps=17 format=4 uid="uid://cmnuxnidbxmri"]
 
 [ext_resource type="Script" uid="uid://cg1rwcmjausin" path="res://Resources/Scripts/Main.cs" id="1_r150o"]
 [ext_resource type="Texture2D" uid="uid://dukdkohwd565v" path="res://Resources/TileMaps/tileMapStars.png" id="2_vn1xt"]
 [ext_resource type="Texture2D" uid="uid://yw7nxh045xsf" path="res://Resources/TileMaps/tileMapGround.png" id="3_0oyik"]
-[ext_resource type="PackedScene" uid="uid://cfaxp46yiq8vc" path="res://Resources/Scenes/PlayerCannon.tscn" id="4_pmlvw"]
+[ext_resource type="PackedScene" uid="uid://beuxdfliva47p" path="res://Resources/Scenes/PlayerCannon.tscn" id="4_pmlvw"]
 [ext_resource type="Script" uid="uid://brooempdkrjv5" path="res://Resources/Scripts/BulletBrain.cs" id="5_3v2sg"]
-[ext_resource type="PackedScene" uid="uid://b1jsiexoklrfq" path="res://Resources/Scenes/EnemyCanon.tscn" id="5_702yn"]
 [ext_resource type="Texture2D" uid="uid://dcnmjlw68ye7s" path="res://Resources/Sprites/gameOverOverlay.png" id="5_flq7x"]
 [ext_resource type="Script" uid="uid://buevqo1acc2lv" path="res://Resources/Scripts/GroundArea.cs" id="6_2aak1"]
 [ext_resource type="Script" uid="uid://8s2wqvyookfo" path="res://Resources/Scripts/ExplosionBrain.cs" id="6_hv5ql"]
@@ -32,7 +31,7 @@ tile_size = Vector2i(1024, 400)
 sources/0 = SubResource("TileSetAtlasSource_kth10")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kth10"]
-size = Vector2(1919, 150)
+size = Vector2(2821, 237)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r150o")
@@ -49,18 +48,15 @@ tile_set = SubResource("TileSet_pf0mt")
 
 [node name="Foreground" type="Node" parent="."]
 
-[node name="EnemyCanon" parent="Foreground" instance=ExtResource("5_702yn")]
-position = Vector2(1739, 859)
-
 [node name="PlayerCannon" parent="Foreground" instance=ExtResource("4_pmlvw")]
-position = Vector2(175, 902)
+position = Vector2(950, 834)
 
 [node name="GroundArea" type="Area2D" parent="Foreground"]
 position = Vector2(880, 974)
 script = ExtResource("6_2aak1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/GroundArea"]
-position = Vector2(80.5, 127)
+position = Vector2(138.5, 102.5)
 shape = SubResource("RectangleShape2D_kth10")
 
 [node name="Explosions" type="Node" parent="."]

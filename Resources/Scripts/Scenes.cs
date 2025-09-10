@@ -10,5 +10,6 @@ public partial class Scenes : Node
     public PackedScene _sceneEnemyExplosion = (PackedScene)GD.Load("res://Resources/Scenes/EnemyExplosion.tscn");
     public PackedScene _scenePlayerStopper = (PackedScene)GD.Load("res://Resources/Scenes/PlayerStopper.tscn");
     public PackedScene _sceneEnemyStopper = (PackedScene)GD.Load("res://Resources/Scenes/EnemyStopper.tscn");
+    public PackedScene _scenePlayerCannon = (PackedScene)GD.Load("res://Resources/Scenes/PlayerCannon.tscn");
 
 }

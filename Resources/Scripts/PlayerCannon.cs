@@ -2,11 +2,13 @@ using Godot;
 using System;
 using System.Security.Cryptography.X509Certificates;
 
-public partial class PlayerCannon : Sprite2D
+public partial class PlayerCannon : Node2D
 {  
     private string ClassName = "PlayerCannon";
     public double LastKnownPosition = 0.0;
-        
+
+    public bool canShoot = true;    
+    public bool canBlock = true;  
     Vector2 PositionInFG = new Vector2(0, 0);
     Vector2 ScaleAsVec2 = new Vector2(0, 0);
     private int debug = 0;
@@ -35,28 +37,28 @@ public partial class PlayerCannon : Sprite2D
         }
             
         if (LastKnownPosition != PositionInFG.Y)
+        {
+            if (PositionInFG.Y < (double)850.0)
             {
-                if (PositionInFG.Y < (double)850.0)
-                {
-                    ScaleAsVec2 = new Vector2(0.5f, 0.5f);
-                    Scale = ScaleAsVec2;
-                    GD.Print(ClassName + " [" + func_name + "] 0.5 Scale at Y coordinate: " + PositionInFG.Y);
-                    LastKnownPosition = PositionInFG.Y;
-                }
-                if (PositionInFG.Y > (double)850.0 && PositionInFG.Y <= (double)950)
-                {
-                    ScaleAsVec2 = new Vector2(0.75f, 0.75f);
-                    Scale = ScaleAsVec2;
-                   GD.Print(ClassName + " [" + func_name + "] 0.75 Scale at Y coordinate: " + PositionInFG.Y);
-                    LastKnownPosition = PositionInFG.Y;
-                }
-                if (PositionInFG.Y > (double)950)
-                {
-                    ScaleAsVec2 = new Vector2(1.0f, 1.0f);
-                    Scale = ScaleAsVec2;
-                    GD.Print(ClassName + " [" + func_name + "] 1.0 Scale at Y coordinate: " + PositionInFG.Y);
-                    LastKnownPosition = PositionInFG.Y;
-                }
+                ScaleAsVec2 = new Vector2(0.5f, 0.5f);
+                Scale = ScaleAsVec2;
+                GD.Print(ClassName + " [" + func_name + "] 0.5 Scale at Y coordinate: " + PositionInFG.Y);
+                LastKnownPosition = PositionInFG.Y;
             }
+            if (PositionInFG.Y > (double)850.0 && PositionInFG.Y <= (double)950)
+            {
+                ScaleAsVec2 = new Vector2(0.75f, 0.75f);
+                Scale = ScaleAsVec2;
+                GD.Print(ClassName + " [" + func_name + "] 0.75 Scale at Y coordinate: " + PositionInFG.Y);
+                LastKnownPosition = PositionInFG.Y;
+            }
+            if (PositionInFG.Y > (double)950)
+            {
+                ScaleAsVec2 = new Vector2(1.0f, 1.0f);
+                Scale = ScaleAsVec2;
+                GD.Print(ClassName + " [" + func_name + "] 1.0 Scale at Y coordinate: " + PositionInFG.Y);
+                LastKnownPosition = PositionInFG.Y;
+            }
+        }
     }
 }

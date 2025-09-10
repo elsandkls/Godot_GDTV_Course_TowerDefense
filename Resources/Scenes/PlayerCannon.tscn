@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfaxp46yiq8vc"]
+[gd_scene load_steps=7 format=3 uid="uid://beuxdfliva47p"]
 
 [ext_resource type="Texture2D" uid="uid://dg6clnuqietnm" path="res://Resources/Sprites/cannon.png" id="1_qlvt6"]
 [ext_resource type="Texture2D" uid="uid://bk6oe86xrrexc" path="res://Resources/Sprites/cannonBarrel.png" id="2_3uv2y"]
@@ -11,10 +11,10 @@ radius = 111.0
 height = 358.0
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("2_g3x0m")
 
 [node name="PlayerCannon" type="Sprite2D" parent="."]
 texture = ExtResource("1_qlvt6")
-script = ExtResource("2_g3x0m")
 
 [node name="PlayerCannonBarrel" type="Sprite2D" parent="PlayerCannon"]
 position = Vector2(2, -61)

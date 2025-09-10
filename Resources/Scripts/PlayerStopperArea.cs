@@ -14,8 +14,10 @@ public partial class PlayerStopperArea : Area2D
     PlayerStopper PlayerStopper;
     EnemyBullet EnemyBullet;
     EnemyBulletArea2D EnemyBulletArea2D;
+    PlayerCannon PlayerCannon;
     private int debug = 1;
     private double DelayDelete = 2.0;
+    
 
     public override void _Ready()
     {
@@ -26,7 +28,8 @@ public partial class PlayerStopperArea : Area2D
         }
         SetProcess(true);
         BulletBrain = (BulletBrain)GetNode("/root/Main/Bullets/BulletBrain");
-        ExplosionBrain = (ExplosionBrain)GetNode("/root/Main/Explosions/ExplosionBrain");          
+        ExplosionBrain = (ExplosionBrain)GetNode("/root/Main/Explosions/ExplosionBrain");    
+        PlayerCannon = (PlayerCannon)GetNode("/root/Main/Foreground/PlayerCannon");      
     }
 
     //public async Task _on_area_entered(Area2D Bullet)
@@ -52,6 +55,11 @@ public partial class PlayerStopperArea : Area2D
             var BulletParentPath = BulletArea2DParent.GetPath();
             PlayerBullet = (PlayerBullet)GetNode(BulletParentPath);
             PlayerBullet.SelfDelete();
+            BulletBrain.PlayerBulletCount--;
+            if (BulletBrain.PlayerBulletCount < 5)
+            {
+                PlayerCannon.canShoot = true;
+            } 
             triggered++;
         }
         
@@ -68,6 +76,7 @@ public partial class PlayerStopperArea : Area2D
             var BulletParentPath = BulletArea2DParent.GetPath();
             EnemyBullet = (EnemyBullet)GetNode(BulletParentPath);
             EnemyBullet.SelfDelete();
+            BulletBrain.EnemyBulletCount--;
             triggered++;
         }
 

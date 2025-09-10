@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmj1xvxvt6uar"]
+[gd_scene load_steps=6 format=3 uid="uid://bue3rdyjtcrlu"]
 
 [ext_resource type="Script" uid="uid://cqiyur51l31n1" path="res://Resources/Scripts/PlayerStopper.cs" id="1_eejhs"]
 [ext_resource type="Texture2D" uid="uid://bhh13lnc0eivu" path="res://Resources/Sprites/bulletStopper.png" id="1_onppp"]
@@ -30,4 +30,8 @@ sprite_frames = SubResource("SpriteFrames_eejhs")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStopper"]
 shape = SubResource("CircleShape2D_eejhs")
 
+[node name="Timer" type="Timer" parent="PlayerStopper"]
+wait_time = 10.0
+
 [connection signal="area_entered" from="PlayerStopper" to="PlayerStopper" method="_on_area_entered" flags=6]
+[connection signal="timeout" from="PlayerStopper/Timer" to="." method="_on_timer_timeout"]

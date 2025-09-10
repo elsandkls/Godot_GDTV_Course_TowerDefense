@@ -13,6 +13,7 @@ public partial class EnemyBullet : Node2D
     private string ThisAnimation = "";
 
     public AnimatedSprite2D ThisSprite { get; private set; }
+    BulletBrain BulletBrain;
 
     // ready runs when the scene enteres the scene tree
     public override void _Ready()
@@ -24,6 +25,7 @@ public partial class EnemyBullet : Node2D
         }
         SetProcess(true);
 
+        BulletBrain = (BulletBrain)GetNode("/root/Main/Bullets/BulletBrain"); 
         ThisSprite = GetNode<AnimatedSprite2D>("EnemyBullet/AnimatedSprite2D");
         foreach (var animName in ThisSprite.SpriteFrames.GetAnimationNames())
         {
@@ -84,6 +86,7 @@ public partial class EnemyBullet : Node2D
         if (PositionTest == true)
         {
             SelfDelete();
+            BulletBrain.EnemyBulletCount--;
         }
     }
 

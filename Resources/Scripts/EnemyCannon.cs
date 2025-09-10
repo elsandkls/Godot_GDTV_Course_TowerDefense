@@ -11,6 +11,8 @@ public partial class EnemyCannon : Sprite2D
     Vector2 ScaleAsVec2 = new Vector2(0, 0);
     private int debug = 0;
  
+    public bool canShoot = true;    
+    public bool canBlock = true;  
     public override void _Ready()
     {
         string func_name = "_Ready";

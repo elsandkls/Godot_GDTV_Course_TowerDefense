@@ -5,6 +5,8 @@ public partial class BulletBrain : Node
 {
     Scenes scenes;
     private int debug = 0;
+    public int PlayerBulletCount = 0;
+    public int EnemyBulletCount = 0;
     
     private string ClassName = "BulletBrain";
     public override void _Ready()
@@ -23,8 +25,8 @@ public partial class BulletBrain : Node
         string func_name = "SpawnPlayerBullet";
         if (debug == 1)
         {
-            GD.Print(ClassName +  "["+func_name+"] SpawnPosition " + SpawnPosition);
-            GD.Print(ClassName +  "["+func_name+"] TargetPosition " + TargetPosition);
+            GD.Print(ClassName + "[" + func_name + "] SpawnPosition " + SpawnPosition);
+            GD.Print(ClassName + "[" + func_name + "] TargetPosition " + TargetPosition);
         }
         //Spawn potionsion 
         var playerBullet = scenes._scenePlayerBullet.Instantiate<PlayerBullet>();
@@ -34,6 +36,7 @@ public partial class BulletBrain : Node
         playerBullet.LookAt(TargetPosition);
         // Set Bullet Animation  ;
         playerBullet.PlayAnimationForMe();
+        PlayerBulletCount++;
     }
 
 
@@ -54,6 +57,7 @@ public partial class BulletBrain : Node
         enemyBullet.LookAt(TargetPosition);
         // Set Bullet Animation 
         enemyBullet.PlayAnimationForMe();
+        EnemyBulletCount++;
     }
 
     // raining enemy bullets
