@@ -4,7 +4,7 @@ using System;
 public partial class PlayerBulletArea2D : Area2D
 {
     private string ClassName = "PlayerBulletArea2D";
-    private int debug = 0;
+    private int debug = 1;
 
     public CollisionShape2D ThisColision { get; private set; }
     public Area2D ThisArea { get; private set; }
@@ -12,16 +12,19 @@ public partial class PlayerBulletArea2D : Area2D
     public void DisableCollisionBeforeDestruction()
     {
         string func_name = "DisableCollisionBeforeDestruction";
-        if (debug == 1)
-        {
-            GD.Print(ClassName + " [" + func_name + "] ");
-        }
         ThisArea = GetNode<Area2D>(".");
-        foreach (var child in ThisArea.GetChildren())
+        foreach (var ChildOfArea in ThisArea.GetChildren())
         {
-            if (child is CollisionShape2D collisionShape)
+            if (debug == 1)
+            {
+                GD.Print(ClassName + " [" + func_name + "]  Triggered by: " + ChildOfArea.Name);
+            }
+            if (ChildOfArea is CollisionShape2D collisionShape)
+            {
                 //collisionShape.Disabled = true;
+                collisionShape.SetDeferred("monitoring", true);
                 collisionShape.SetDeferred("disabled", true);
+            }
         } 
     }
     

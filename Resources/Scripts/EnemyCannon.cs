@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class EnemyCannon : Sprite2D
+public partial class EnemyCannon : Node2D
 { 
     
     private string ClassName = "EnemyCannon";

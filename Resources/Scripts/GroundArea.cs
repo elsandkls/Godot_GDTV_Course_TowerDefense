@@ -5,7 +5,7 @@ public partial class GroundArea : Area2D
 {
 
     private string ClassName = "GroundArea";
-    private int debug = 1;
+    private int debug = 0;
     BulletBrain BulletBrain;
     ExplosionBrain ExplosionBrain; 
     PlayerBullet PlayerBullet; 
@@ -45,9 +45,7 @@ public partial class GroundArea : Area2D
             var BulletParentPath = BulletArea2DParent.GetPath();
             PlayerBullet = (PlayerBullet)GetNode(BulletParentPath);
             ExplosionBrain.SpawnPlayerExplosion(PlayerBullet.GlobalPosition);
-
-            PlayerBullet.SelfDelete(); 
-            PlayerCannon.canShoot = true;
+            PlayerBullet.SelfDelete();  
         }
         
         if (Bullet.Name == "EnemyBullet")
@@ -62,7 +60,6 @@ public partial class GroundArea : Area2D
             var BulletParentPath = BulletArea2DParent.GetPath();
             EnemyBullet = (EnemyBullet)GetNode(BulletParentPath);
             ExplosionBrain.SpawnEnemyExplosion(EnemyBullet.GlobalPosition);
-
             EnemyBullet.SelfDelete(); 
         } 
     }

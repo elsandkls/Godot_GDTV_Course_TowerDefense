@@ -14,6 +14,7 @@ public partial class EnemyBullet : Node2D
 
     public AnimatedSprite2D ThisSprite { get; private set; }
     BulletBrain BulletBrain;
+    EnemyCannon EnemyCannon;
 
     // ready runs when the scene enteres the scene tree
     public override void _Ready()
@@ -21,11 +22,11 @@ public partial class EnemyBullet : Node2D
         string func_name = "_Ready";
         if (debug == 1)
         {
-           GD.Print(ClassName +  "["+func_name+"] ");
+            GD.Print(ClassName + "[" + func_name + "] ");
         }
         SetProcess(true);
-
-        BulletBrain = (BulletBrain)GetNode("/root/Main/Bullets/BulletBrain"); 
+        EnemyCannon = (EnemyCannon)GetNode("/root/Main/Foreground/EnemyCannon");
+        BulletBrain = (BulletBrain)GetNode("/root/Main/Bullets/BulletBrain");
         ThisSprite = GetNode<AnimatedSprite2D>("EnemyBullet/AnimatedSprite2D");
         foreach (var animName in ThisSprite.SpriteFrames.GetAnimationNames())
         {
@@ -85,8 +86,7 @@ public partial class EnemyBullet : Node2D
         }
         if (PositionTest == true)
         {
-            SelfDelete();
-            BulletBrain.EnemyBulletCount--;
+            SelfDelete(); 
         }
     }
 
@@ -98,6 +98,11 @@ public partial class EnemyBullet : Node2D
             GD.Print(ClassName +  "["+func_name+"]  Deleting Bullet");
         }
         QueueFree();
+        BulletBrain.EnemyBulletCount--;
+        if (BulletBrain.EnemyBulletCount < 5)
+        {
+            EnemyCannon.canShoot = true;
+        } 
     }
 
 }

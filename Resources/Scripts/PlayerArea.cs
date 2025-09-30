@@ -5,7 +5,7 @@ public partial class PlayerArea : Area2D
 {
 
     private string ClassName = "PlayerArea";
-    private int debug = 1;
+    private int debug = 0;
     BulletBrain BulletBrain;
     ExplosionBrain ExplosionBrain; 
     PlayerBullet PlayerBullet; 

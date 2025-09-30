@@ -32,6 +32,7 @@ shape = SubResource("CircleShape2D_eejhs")
 
 [node name="Timer" type="Timer" parent="PlayerStopper"]
 wait_time = 10.0
+one_shot = true
 
 [connection signal="area_entered" from="PlayerStopper" to="PlayerStopper" method="_on_area_entered" flags=6]
 [connection signal="timeout" from="PlayerStopper/Timer" to="." method="_on_timer_timeout"]

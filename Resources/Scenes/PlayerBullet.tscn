@@ -57,7 +57,7 @@ rotation = -0.359538
 shape = SubResource("RectangleShape2D_vtpug")
 
 [node name="Timer" type="Timer" parent="PlayerBullet"]
-wait_time = 2.0
+wait_time = 6.0
 autostart = true
 
 [connection signal="timeout" from="PlayerBullet/Timer" to="." method="_on_timer_timeout"]

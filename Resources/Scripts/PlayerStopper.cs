@@ -5,9 +5,11 @@ public partial class PlayerStopper : Node2D
 {
     private string ClassName = "PlayerStopper";
     Scenes scenes;
-    private int debug = 1;
+    private int debug = 0;
     public AnimatedSprite2D ThisSprite { get; private set; }
-    private string ThisAnimation = "";
+    private string ThisAnimation = ""; 
+    StopperBrain StopperBrain;
+    PlayerCannon PlayerCannon;
 
     public override void _Ready()
     {
@@ -18,6 +20,8 @@ public partial class PlayerStopper : Node2D
         }
         SetProcess(true);
 
+        StopperBrain = (StopperBrain)GetNode("/root/Main/BulletStopper/StopperBrain");    
+        PlayerCannon = (PlayerCannon)GetNode("/root/Main/Foreground/PlayerCannon");  
         ThisSprite = GetNode<AnimatedSprite2D>("PlayerStopper/AnimatedSprite2D");
         foreach (var animName in ThisSprite.SpriteFrames.GetAnimationNames())
         {
@@ -55,7 +59,7 @@ public partial class PlayerStopper : Node2D
         {
             GD.Print(ClassName + " [" + func_name + "] ");
         }
-        SelfDelete();
+        SelfDelete(); 
     }
 
     public void SelfDelete()
@@ -66,6 +70,11 @@ public partial class PlayerStopper : Node2D
             GD.Print(ClassName + " [" + func_name + "] ");
         }
         QueueFree();
+        StopperBrain.PlayerStopperCount--;
+        if (StopperBrain.PlayerStopperCount < 5)
+        {
+            PlayerCannon.canBlock = true;
+        }
     }
 
 

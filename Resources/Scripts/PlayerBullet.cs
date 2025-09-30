@@ -64,15 +64,7 @@ public partial class PlayerBullet : Node2D
         Boolean PositionTest = false;
         //Width = 1600 Height = 800
         Vector2 PositionInFG = GlobalPosition;
-        if (PositionInFG.Y > (double)1920.0)
-        {
-            PositionTest = true;
-        }
-        if (PositionInFG.Y < (double)0.0)
-        {
-            PositionTest = true;
-        }
-        if (PositionInFG.X > (double)1080.0)
+        if (PositionInFG.X > (double)1920.0)
         {
             PositionTest = true;
         }
@@ -80,11 +72,17 @@ public partial class PlayerBullet : Node2D
         {
             PositionTest = true;
         }
+        if (PositionInFG.Y > (double)1080.0)
+        {
+            PositionTest = true;
+        }
+        if (PositionInFG.Y < (double)0.0)
+        {
+            PositionTest = true;
+        }
         if (PositionTest == true)
         {
-            SelfDelete();
-            PlayerCannon.canShoot = true;
-            BulletBrain.PlayerBulletCount--;
+            SelfDelete(); 
         }
     }
 
@@ -96,6 +94,11 @@ public partial class PlayerBullet : Node2D
             GD.Print(ClassName +  "["+func_name+"]  Delete Player Bullet"); 
         }
         QueueFree();
+        BulletBrain.PlayerBulletCount--;
+        if (BulletBrain.PlayerBulletCount < 5)
+        {
+            PlayerCannon.canShoot = true;
+        } 
     }
 
 }

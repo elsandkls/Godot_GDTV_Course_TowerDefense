@@ -6,17 +6,23 @@ public partial class BulletBrain : Node
     Scenes scenes;
     private int debug = 0;
     public int PlayerBulletCount = 0;
+    public int MaxPlayerBullet = 5;
     public int EnemyBulletCount = 0;
+    public int MaxEnemyBullets = 10;
     
     private string ClassName = "BulletBrain";
+    PlayerCannon PlayerCannon;
+    EnemyCannon EnemyCannon;
     public override void _Ready()
     {
         string func_name = "_Ready";
         if (debug == 1)
         {
-            GD.Print(ClassName +  "["+func_name+"]"); 
+            GD.Print(ClassName + "[" + func_name + "]");
         }
         scenes = GetNode<Scenes>("/root/Main/Scenes");
+        PlayerCannon = (PlayerCannon)GetNode("/root/Main/Foreground/PlayerCannon");
+        EnemyCannon = (EnemyCannon)GetNode("/root/Main/Foreground/EnemyCannon");
     }
 
     // public PackedScene _scenePlayerBullet = (PackedScene)GD.Load("res://Resources/Scenes/PlayerBullet.tscn");
@@ -37,6 +43,10 @@ public partial class BulletBrain : Node
         // Set Bullet Animation  ;
         playerBullet.PlayAnimationForMe();
         PlayerBulletCount++;
+        if (PlayerBulletCount >= MaxPlayerBullet)
+        {
+            PlayerCannon.canShoot = false;
+        } 
     }
 
 
@@ -58,6 +68,10 @@ public partial class BulletBrain : Node
         // Set Bullet Animation 
         enemyBullet.PlayAnimationForMe();
         EnemyBulletCount++;
+        if (EnemyBulletCount >= MaxEnemyBullets)
+        {
+            EnemyCannon.canShoot = false;
+        } 
     }
 
     // raining enemy bullets
