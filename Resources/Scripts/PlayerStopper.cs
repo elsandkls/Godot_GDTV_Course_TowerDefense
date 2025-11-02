@@ -10,6 +10,7 @@ public partial class PlayerStopper : Node2D
     private string ThisAnimation = ""; 
     StopperBrain StopperBrain;
     PlayerCannon PlayerCannon;
+    Hud Hud;
 
     public override void _Ready()
     {
@@ -20,8 +21,10 @@ public partial class PlayerStopper : Node2D
         }
         SetProcess(true);
 
-        StopperBrain = (StopperBrain)GetNode("/root/Main/BulletStopper/StopperBrain");    
-        PlayerCannon = (PlayerCannon)GetNode("/root/Main/Foreground/PlayerCannon");  
+        StopperBrain = (StopperBrain)GetNode("/root/Main/BulletStopper/StopperBrain");
+        PlayerCannon = (PlayerCannon)GetNode("/root/Main/Foreground/PlayerCannon");
+        Hud = (Hud)GetNode("/root/Main/Hud/Hud");
+        
         ThisSprite = GetNode<AnimatedSprite2D>("PlayerStopper/AnimatedSprite2D");
         foreach (var animName in ThisSprite.SpriteFrames.GetAnimationNames())
         {
@@ -71,6 +74,7 @@ public partial class PlayerStopper : Node2D
         }
         QueueFree();
         StopperBrain.PlayerStopperCount--;
+        Hud.HudUpdate_Stoppers(StopperBrain.PlayerStopperCount);
         if (StopperBrain.PlayerStopperCount < 5)
         {
             PlayerCannon.canBlock = true;

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class ExplosionBrain : Node
 {
@@ -7,7 +8,10 @@ public partial class ExplosionBrain : Node
     private int debug = 0;
 
     private string ClassName = "ExplosionBrain";
+    
+    private List<Node> spawnedExplosionNodes = new();
 
+        
     public override void _Ready()
     {
         string func_name = "_Ready";
@@ -31,6 +35,7 @@ public partial class ExplosionBrain : Node
         //GetNode<Node>("/root/Main/Explosions").AddChild(explosion);
 
         GetNode<Node>("/root/Main/Explosions").CallDeferred(Node.MethodName.AddChild, explosion);
+        spawnedExplosionNodes.Add(explosion);
         explosion.GlobalPosition = SpawnPosition;
         // Set Bullet Animation  ;
         explosion.PlayAnimationForMe();
@@ -46,10 +51,33 @@ public partial class ExplosionBrain : Node
         }
         //Spawn potionsion 
         var explosion = scenes._sceneEnemyExplosion.Instantiate<EnemyExplosion>();
-        GetNode<Node>("/root/Main/Explosions").CallDeferred(Node.MethodName.AddChild, explosion); 
+        GetNode<Node>("/root/Main/Explosions").CallDeferred(Node.MethodName.AddChild, explosion);
+        spawnedExplosionNodes.Add(explosion);
         explosion.GlobalPosition = SpawnPosition;
         // Set Bullet Animation  ;
         explosion.PlayAnimationForMe();
     }
+
+    public void CleanUpExplosions()
+    {
+        foreach (var node in spawnedExplosionNodes)
+        {
+            if (IsInstanceValid(node))
+                node.QueueFree();
+        }
+        spawnedExplosionNodes.Clear();
+        
+    }
     
+    public void CleanUpSingleExplosion(Node NodeDeleted)
+    {
+        foreach (var node in spawnedExplosionNodes.ToArray())
+        {
+            if (node == NodeDeleted)
+            {
+                spawnedExplosionNodes.Remove(NodeDeleted);
+            }
+        } 
+    }
+
 }

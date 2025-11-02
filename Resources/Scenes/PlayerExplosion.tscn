@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjtjj85iri78a"]
+[gd_scene load_steps=11 format=3 uid="uid://cjtjj85iri78a"]
 
 [ext_resource type="Script" uid="uid://6mwg34juxte7" path="res://Resources/Scripts/PlayerExplosion.cs" id="1_178t2"]
 [ext_resource type="Texture2D" uid="uid://d332eelowue8h" path="res://Resources/Sprites/explosionPlayer0.png" id="1_kmpaf"]
 [ext_resource type="Texture2D" uid="uid://d33bf1cmcs1rh" path="res://Resources/Sprites/explosionPlayer1.png" id="2_178t2"]
+[ext_resource type="Script" uid="uid://di07c3c6m7nae" path="res://Resources/Scripts/PlayerExplosion_Area2D.cs" id="2_hnhfb"]
 [ext_resource type="Texture2D" uid="uid://bgajekbcwfktw" path="res://Resources/Sprites/explosionPlayer3.png" id="3_hnhfb"]
 [ext_resource type="Texture2D" uid="uid://dm4j0hjem7rag" path="res://Resources/Sprites/explosionPlayer5.png" id="4_8xie0"]
 [ext_resource type="Texture2D" uid="uid://cjc8ql77u15qv" path="res://Resources/Sprites/explosionPlayer4.png" id="5_dbq32"]
@@ -40,20 +41,23 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_adknj"]
 radius = 204.157
 
-[node name="PlayerExplosion" type="Area2D"]
+[node name="Node2D" type="Node2D"]
 script = ExtResource("1_178t2")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="PlayerExplosion" type="Area2D" parent="."]
+script = ExtResource("2_hnhfb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerExplosion"]
 sprite_frames = SubResource("SpriteFrames_fg7hx")
 frame_progress = 0.0492726
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerExplosion"]
 shape = SubResource("CircleShape2D_adknj")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="PlayerExplosion"]
 wait_time = 10.0
 one_shot = true
 autostart = true
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished" flags=6]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="PlayerExplosion/AnimatedSprite2D" to="PlayerExplosion" method="_on_animated_sprite_2d_animation_finished" flags=6]
+[connection signal="timeout" from="PlayerExplosion/Timer" to="PlayerExplosion" method="_on_timer_timeout"]

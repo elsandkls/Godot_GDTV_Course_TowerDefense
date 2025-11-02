@@ -6,7 +6,7 @@ public partial class EnemyBullet : Node2D
 {
     
     private string ClassName = "EnemyBullet";
-    public int speed = -150;
+    [Export] public int speed = -150;
     Vector2 velocity = new Vector2(0, 0);
     private int debug = 0;
 
@@ -103,6 +103,7 @@ public partial class EnemyBullet : Node2D
         {
             EnemyCannon.canShoot = true;
         } 
+
     }
 
 }

@@ -4,14 +4,14 @@ using System;
 public partial class PlayerBullet : Node2D
 {
     private string ClassName = "PlayerBullet";
-    public int speed = 150;
+    [Export] public int speed = 150;
     Vector2 velocity = new Vector2(0, 0);
     private int debug =0;
     public AnimatedSprite2D ThisSprite { get; private set; } 
     private string ThisAnimation = "";
     PlayerCannon PlayerCannon;
     BulletBrain BulletBrain;
-
+    Hud Hud;
 
     public override void _Ready()
     {
@@ -22,7 +22,8 @@ public partial class PlayerBullet : Node2D
         }
         SetProcess(true);
         PlayerCannon = (PlayerCannon)GetNode("/root/Main/Foreground/PlayerCannon");
-        BulletBrain = (BulletBrain)GetNode("/root/Main/Bullets/BulletBrain"); 
+        BulletBrain = (BulletBrain)GetNode("/root/Main/Bullets/BulletBrain");
+        Hud = (Hud)GetNode("/root/Main/Hud/Hud");
         ThisSprite = GetNode<AnimatedSprite2D>("PlayerBullet/AnimatedSprite2D");
         foreach (var animName in ThisSprite.SpriteFrames.GetAnimationNames())
         {
@@ -95,6 +96,8 @@ public partial class PlayerBullet : Node2D
         }
         QueueFree();
         BulletBrain.PlayerBulletCount--;
+        Hud.HudUpdate_Bullets(BulletBrain.PlayerBulletCount);
+
         if (BulletBrain.PlayerBulletCount < 5)
         {
             PlayerCannon.canShoot = true;

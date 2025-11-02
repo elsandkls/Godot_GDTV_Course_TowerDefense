@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PlayerExplosion : Area2D
+public partial class PlayerExplosion : Node2D
 {
     private int debug = 0;
     private string ClassName = "PlayerExplosion";
@@ -16,7 +16,8 @@ public partial class PlayerExplosion : Area2D
     public override void _Ready()
     {
         loops++;
-        string func_name = "_Ready";
+        string func_name = "_Ready";        
+        ThisSprite = GetNode<AnimatedSprite2D>("PlayerExplosion/AnimatedSprite2D");
         if (debug == 1)
         {
             GD.Print(ClassName + " [" + func_name + "] AnimationName [" + AnimationName + "]");
@@ -34,7 +35,7 @@ public partial class PlayerExplosion : Area2D
         string func_name = "FindSpriteFrame";
         if (ThisAnimation == "" || ThisAnimation == null)
         { 
-            ThisSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+            ThisSprite = GetNode<AnimatedSprite2D>("PlayerExplosion/AnimatedSprite2D");
             if (ThisSprite?.SpriteFrames == null)
             {
                 GD.PrintErr(ClassName + " [" + func_name + "] No SpriteFrames found on AnimatedSprite2D!");

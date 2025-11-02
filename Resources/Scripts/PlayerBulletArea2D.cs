@@ -4,7 +4,7 @@ using System;
 public partial class PlayerBulletArea2D : Area2D
 {
     private string ClassName = "PlayerBulletArea2D";
-    private int debug = 1;
+    private int debug = 0;
 
     public CollisionShape2D ThisColision { get; private set; }
     public Area2D ThisArea { get; private set; }

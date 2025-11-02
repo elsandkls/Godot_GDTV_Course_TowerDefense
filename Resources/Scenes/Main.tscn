@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cmnuxnidbxmri"]
+[gd_scene load_steps=23 format=4 uid="uid://cmnuxnidbxmri"]
 
 [ext_resource type="Script" uid="uid://cg1rwcmjausin" path="res://Resources/Scripts/Main.cs" id="1_r150o"]
 [ext_resource type="Texture2D" uid="uid://dukdkohwd565v" path="res://Resources/TileMaps/tileMapStars.png" id="2_vn1xt"]
@@ -6,13 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://b1jsiexoklrfq" path="res://Resources/Scenes/EnemyCannon.tscn" id="4_2aak1"]
 [ext_resource type="PackedScene" uid="uid://beuxdfliva47p" path="res://Resources/Scenes/PlayerCannon.tscn" id="4_pmlvw"]
 [ext_resource type="Script" uid="uid://brooempdkrjv5" path="res://Resources/Scripts/BulletBrain.cs" id="5_3v2sg"]
-[ext_resource type="Texture2D" uid="uid://dcnmjlw68ye7s" path="res://Resources/Sprites/gameOverOverlay.png" id="5_flq7x"]
 [ext_resource type="Script" uid="uid://buevqo1acc2lv" path="res://Resources/Scripts/GroundArea.cs" id="6_2aak1"]
 [ext_resource type="Script" uid="uid://8s2wqvyookfo" path="res://Resources/Scripts/ExplosionBrain.cs" id="6_hv5ql"]
 [ext_resource type="Script" uid="uid://xyscer3pb7o7" path="res://Resources/Scripts/StopperBrain.cs" id="7_e2jdn"]
 [ext_resource type="Script" uid="uid://cm428wc88aqmj" path="res://Resources/Scripts/EnemySpawnerTimer.cs" id="7_gpord"]
 [ext_resource type="Script" uid="uid://loo42ute1h48" path="res://Resources/Scripts/Scenes.cs" id="8_7m8rt"]
-[ext_resource type="Script" uid="uid://b0ihxsfo8q663" path="res://Resources/Scripts/Hud.cs" id="11_kth10"]
+[ext_resource type="PackedScene" uid="uid://dyqgb2ror2hss" path="res://Resources/Scenes/Hud.tscn" id="12_kth10"]
+[ext_resource type="Texture2D" uid="uid://domk41sbeekp3" path="res://Resources/Sprites/24.png" id="13_adknj"]
+[ext_resource type="Texture2D" uid="uid://dcnmjlw68ye7s" path="res://Resources/Sprites/gameOverOverlay.png" id="13_kth10"]
+[ext_resource type="Texture2D" uid="uid://tf6pwohp4t0c" path="res://Resources/Sprites/clicked_25.png" id="14_aaeif"]
+[ext_resource type="Texture2D" uid="uid://newd4p0j5304" path="res://Resources/Sprites/18.png" id="16_djtvj"]
+[ext_resource type="Texture2D" uid="uid://b6tl4vk6baxh1" path="res://Resources/Sprites/clicked_19.png" id="17_wkxfm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2jdn"]
 texture = ExtResource("2_vn1xt")
@@ -86,147 +90,94 @@ autostart = true
 script = ExtResource("7_gpord")
 
 [node name="Hud" type="Node" parent="."]
-script = ExtResource("11_kth10")
 
-[node name="TextRect_Hud" type="TextureRect" parent="Hud"]
-offset_left = 5.0
-offset_top = -1.0
-offset_right = 610.0
-offset_bottom = 254.0
-texture = ExtResource("5_flq7x")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Hud/TextRect_Hud"]
-layout_mode = 0
-offset_right = 608.0
-offset_bottom = 241.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Hud/TextRect_Hud/HBoxContainer"]
-custom_minimum_size = Vector2(200, 215)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-
-[node name="HUD_Health" type="RichTextLabel" parent="Hud/TextRect_Hud/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
-theme_override_font_sizes/normal_font_size = 36
-text = "Health:
-"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 2
-
-[node name="HUD_Points" type="RichTextLabel" parent="Hud/TextRect_Hud/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
-theme_override_font_sizes/normal_font_size = 36
-text = "Points: "
-fit_content = true
-scroll_active = false
-horizontal_alignment = 2
-
-[node name="HUD_Bullets" type="RichTextLabel" parent="Hud/TextRect_Hud/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
-theme_override_font_sizes/normal_font_size = 36
-text = "Bullets: "
-fit_content = true
-scroll_active = false
-horizontal_alignment = 2
-
-[node name="HUD_Stoppers" type="RichTextLabel" parent="Hud/TextRect_Hud/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
-theme_override_font_sizes/normal_font_size = 36
-text = "Stoppers: "
-fit_content = true
-scroll_active = false
-horizontal_alignment = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Hud/TextRect_Hud/HBoxContainer"]
-custom_minimum_size = Vector2(200, 215)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-
-[node name="HUD_Health" type="RichTextLabel" parent="Hud/TextRect_Hud/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
-theme_override_font_sizes/normal_font_size = 36
-text = "0
-"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 2
-
-[node name="HUD_Points" type="RichTextLabel" parent="Hud/TextRect_Hud/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
-theme_override_font_sizes/normal_font_size = 36
-text = "0"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 2
-
-[node name="HUD_Bullets" type="RichTextLabel" parent="Hud/TextRect_Hud/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
-theme_override_font_sizes/normal_font_size = 36
-text = "0"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 2
-
-[node name="HUD_Stoppers" type="RichTextLabel" parent="Hud/TextRect_Hud/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
-theme_override_font_sizes/normal_font_size = 36
-text = "0"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 2
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="Hud/TextRect_Hud/HBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-
-[node name="HUD_Health" type="RichTextLabel" parent="Hud/TextRect_Hud/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
-theme_override_font_sizes/normal_font_size = 36
-text = "|❤️
-"
-fit_content = true
-scroll_active = false
-
-[node name="HUD_Points" type="RichTextLabel" parent="Hud/TextRect_Hud/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
-theme_override_font_sizes/normal_font_size = 36
-text = "|🌟"
-fit_content = true
-scroll_active = false
-
-[node name="HUD_Bullets" type="RichTextLabel" parent="Hud/TextRect_Hud/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
-theme_override_font_sizes/normal_font_size = 36
-text = "|🚀"
-fit_content = true
-scroll_active = false
-
-[node name="HUD_Stoppers" type="RichTextLabel" parent="Hud/TextRect_Hud/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
-theme_override_font_sizes/normal_font_size = 36
-text = "|🛡️"
-fit_content = true
-scroll_active = false
+[node name="Hud" parent="Hud" instance=ExtResource("12_kth10")]
 
 [node name="Scenes" type="Node" parent="."]
 script = ExtResource("8_7m8rt")
 
+[node name="GameOverHud" type="BoxContainer" parent="."]
+top_level = true
+offset_left = 511.0
+offset_top = 200.0
+offset_right = 1526.0
+offset_bottom = 893.0
+
+[node name="TextureRect" type="TextureRect" parent="GameOverHud"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("13_kth10")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOverHud/TextureRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverHud/TextureRect/HBoxContainer"]
+custom_minimum_size = Vector2(200, 693)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 2
+
+[node name="ExitButton" type="TextureButton" parent="GameOverHud/TextureRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("13_adknj")
+texture_pressed = ExtResource("14_aaeif")
+stretch_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOverHud/TextureRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+text = "Exit Game"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="GameOverHud/TextureRect/HBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOverHud/TextureRect/HBoxContainer/VBoxContainer3"]
+clip_contents = false
+custom_minimum_size = Vector2(607, 693)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.982343, 0.982342, 0.982342, 1)
+theme_override_font_sizes/normal_font_size = 100
+text = "Game Over"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GameOverHud/TextureRect/HBoxContainer"]
+custom_minimum_size = Vector2(200, 693)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 2
+
+[node name="StartOverButton" type="TextureButton" parent="GameOverHud/TextureRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("16_djtvj")
+texture_pressed = ExtResource("17_wkxfm")
+stretch_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOverHud/TextureRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+text = "Play Again"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="area_entered" from="Foreground/GroundArea" to="Foreground/GroundArea" method="_on_ground_area_entered"]
 [connection signal="timeout" from="Bullets/BulletBrain/enemySpawner" to="Bullets/BulletBrain/enemySpawner" method="_on_timeout"]
+[connection signal="pressed" from="GameOverHud/TextureRect/HBoxContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="GameOverHud/TextureRect/HBoxContainer/VBoxContainer2/StartOverButton" to="." method="_on_start_over_button_pressed"]

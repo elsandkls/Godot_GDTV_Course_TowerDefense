@@ -3,7 +3,4 @@
     <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include="Resources\Scripts\test.html" />
-  </ItemGroup>
 </Project>

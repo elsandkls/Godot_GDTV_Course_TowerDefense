@@ -29,4 +29,4 @@ script = ExtResource("5_oxmq8")
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_g3x0m")
 
-[connection signal="area_entered" from="PlayerCannon/PlayerArea" to="PlayerCannon/PlayerArea" method="_on_area_entered"]
+[connection signal="area_entered" from="PlayerCannon/PlayerArea" to="PlayerCannon/PlayerArea" method="_on_player_area_entered"]

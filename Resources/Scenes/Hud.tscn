@@ -1,0 +1,144 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyqgb2ror2hss"]
+
+[ext_resource type="Script" uid="uid://b0ihxsfo8q663" path="res://Resources/Scripts/Hud.cs" id="1_to34u"]
+[ext_resource type="Texture2D" uid="uid://dcnmjlw68ye7s" path="res://Resources/Sprites/gameOverOverlay.png" id="1_yty4j"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_to34u")
+
+[node name="TextRect_Hud" type="TextureRect" parent="."]
+offset_left = 5.0
+offset_top = -1.0
+offset_right = 460.0
+offset_bottom = 254.0
+texture = ExtResource("1_yty4j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextRect_Hud"]
+layout_mode = 0
+offset_right = 458.0
+offset_bottom = 241.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextRect_Hud/HBoxContainer"]
+custom_minimum_size = Vector2(200, 215)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="HUD_Health" type="RichTextLabel" parent="TextRect_Hud/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "Health:
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 2
+
+[node name="HUD_Points" type="RichTextLabel" parent="TextRect_Hud/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "Points: "
+fit_content = true
+scroll_active = false
+horizontal_alignment = 2
+
+[node name="HUD_Bullets" type="RichTextLabel" parent="TextRect_Hud/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "Bullets: "
+fit_content = true
+scroll_active = false
+horizontal_alignment = 2
+
+[node name="HUD_Stoppers" type="RichTextLabel" parent="TextRect_Hud/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "Stoppers: "
+fit_content = true
+scroll_active = false
+horizontal_alignment = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TextRect_Hud/HBoxContainer"]
+custom_minimum_size = Vector2(150, 215)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="HUD_Health" type="RichTextLabel" parent="TextRect_Hud/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "0000000
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 2
+
+[node name="HUD_Points" type="RichTextLabel" parent="TextRect_Hud/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "0000000"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 2
+
+[node name="HUD_Bullets" type="RichTextLabel" parent="TextRect_Hud/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "0000000"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 2
+
+[node name="HUD_Stoppers" type="RichTextLabel" parent="TextRect_Hud/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "0000000"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="TextRect_Hud/HBoxContainer"]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+
+[node name="HUD_Health" type="RichTextLabel" parent="TextRect_Hud/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "|❤️
+"
+fit_content = true
+scroll_active = false
+
+[node name="HUD_Points" type="RichTextLabel" parent="TextRect_Hud/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "|🌟"
+fit_content = true
+scroll_active = false
+
+[node name="HUD_Bullets" type="RichTextLabel" parent="TextRect_Hud/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "|🚀"
+fit_content = true
+scroll_active = false
+
+[node name="HUD_Stoppers" type="RichTextLabel" parent="TextRect_Hud/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.997881, 0.777833, 0.69984, 1)
+theme_override_font_sizes/normal_font_size = 36
+text = "|🛡️"
+fit_content = true
+scroll_active = false

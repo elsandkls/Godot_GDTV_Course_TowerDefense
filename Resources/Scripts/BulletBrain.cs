@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class BulletBrain : Node
 {
@@ -9,10 +10,13 @@ public partial class BulletBrain : Node
     public int MaxPlayerBullet = 5;
     public int EnemyBulletCount = 0;
     public int MaxEnemyBullets = 10;
+
+    private List<Node> spawnedBulletNodes = new();
     
     private string ClassName = "BulletBrain";
     PlayerCannon PlayerCannon;
     EnemyCannon EnemyCannon;
+    Hud Hud;
     public override void _Ready()
     {
         string func_name = "_Ready";
@@ -23,6 +27,7 @@ public partial class BulletBrain : Node
         scenes = GetNode<Scenes>("/root/Main/Scenes");
         PlayerCannon = (PlayerCannon)GetNode("/root/Main/Foreground/PlayerCannon");
         EnemyCannon = (EnemyCannon)GetNode("/root/Main/Foreground/EnemyCannon");
+        Hud = (Hud)GetNode("/root/Main/Hud/Hud");
     }
 
     // public PackedScene _scenePlayerBullet = (PackedScene)GD.Load("res://Resources/Scenes/PlayerBullet.tscn");
@@ -37,16 +42,19 @@ public partial class BulletBrain : Node
         //Spawn potionsion 
         var playerBullet = scenes._scenePlayerBullet.Instantiate<PlayerBullet>();
         GetNode<Node>("/root/Main/Bullets").AddChild(playerBullet);
+        spawnedBulletNodes.Add(playerBullet);
+
         playerBullet.GlobalPosition = SpawnPosition;
         // Look at target position
         playerBullet.LookAt(TargetPosition);
         // Set Bullet Animation  ;
         playerBullet.PlayAnimationForMe();
         PlayerBulletCount++;
+        Hud.HudUpdate_Bullets( PlayerBulletCount );
         if (PlayerBulletCount >= MaxPlayerBullet)
         {
             PlayerCannon.canShoot = false;
-        } 
+        }          
     }
 
 
@@ -62,6 +70,8 @@ public partial class BulletBrain : Node
         //Spawn potionsion 
         var enemyBullet = scenes._sceneEnemyBullet.Instantiate<EnemyBullet>();
         GetNode<Node>("/root/Main/Bullets").AddChild(enemyBullet);
+        spawnedBulletNodes.Add(enemyBullet);
+
         enemyBullet.GlobalPosition = SpawnPosition;
         // Look at target position
         enemyBullet.LookAt(TargetPosition);
@@ -80,7 +90,7 @@ public partial class BulletBrain : Node
         string func_name = "spawnEnemy";
         if (debug == 1)
         {
-            GD.Print(ClassName +  "["+func_name+"]"); 
+            GD.Print(ClassName + "[" + func_name + "]");
         }
         float RandomNumber1 = GD.RandRange(0, 1000);
         int XCoord1 = (int)Convert.ToSingle(RandomNumber1);
@@ -92,6 +102,30 @@ public partial class BulletBrain : Node
 
         SpawnEnemyBullet(SpawnPosition, TargetPosition);
     }
+
+
+    public void CleanUpBullets()
+    {
+        foreach (var node in spawnedBulletNodes)
+        {
+            if (IsInstanceValid(node))
+                node.QueueFree();
+        }
+        spawnedBulletNodes.Clear();
+        PlayerBulletCount = 0;
+        EnemyBulletCount = 0;
+    }
+    
+    public void CleanUpSingleBullet(Node NodeDeleted)
+    {
+        foreach (var node in spawnedBulletNodes.ToArray())
+        {
+            if (node == NodeDeleted)
+            {
+                spawnedBulletNodes.Remove(NodeDeleted);
+            }
+        } 
+    }   
 
 } 
   
