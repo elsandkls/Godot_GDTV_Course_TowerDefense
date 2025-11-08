@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6ygnp4py56po"]
+[gd_scene load_steps=10 format=3 uid="uid://b6ygnp4py56po"]
 
 [ext_resource type="Script" uid="uid://de7op2xyf2tqw" path="res://Resources/Scripts/EnemyBullet.cs" id="1_etdp5"]
 [ext_resource type="Texture2D" uid="uid://dfqv8ei6vy4a2" path="res://Resources/Sprites/bulletEnemy.png" id="1_qb50g"]
@@ -24,6 +24,21 @@ size = Vector2(16, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dg8k0"]
 size = Vector2(15, 13.5)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dg8k0"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xl0rl"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+direction = Vector3(-180, 0, 0)
+spread = 10.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+scale_max = 10.0
+scale_over_velocity_max = 1.0
+color = Color(0.962118, 0.433028, 0.448589, 1)
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.37
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_etdp5")
@@ -53,5 +68,19 @@ shape = SubResource("RectangleShape2D_dg8k0")
 wait_time = 6.0
 one_shot = true
 autostart = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="EnemyBullet"]
+modulate = Color(0.969028, 0.15864, 0.810984, 1)
+self_modulate = Color(0.886045, 0.808028, 0.124173, 1)
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_dg8k0")
+position = Vector2(-30, 0)
+scale = Vector2(3, 3)
+amount = 50
+lifetime = 0.5
+randomness = 1.0
+trail_sections = 4
+trail_section_subdivisions = 2
+process_material = SubResource("ParticleProcessMaterial_xl0rl")
 
 [connection signal="timeout" from="EnemyBullet/Timer" to="." method="_on_timer_timeout"]

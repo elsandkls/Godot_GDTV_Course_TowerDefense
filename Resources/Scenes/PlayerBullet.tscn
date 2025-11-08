@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://3ffmxjiels24"]
+[gd_scene load_steps=11 format=3 uid="uid://3ffmxjiels24"]
 
 [ext_resource type="Texture2D" uid="uid://bxgpi6gft2wf5" path="res://Resources/Sprites/bulletPlayer.png" id="1_a6j5b"]
 [ext_resource type="Script" uid="uid://bjpvxmeyiasna" path="res://Resources/Scripts/PlayerBullet.cs" id="1_twhka"]
@@ -27,6 +27,13 @@ size = Vector2(38.3783, 12.5084)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtpug"]
 size = Vector2(38.3876, 14.6582)
+
+[sub_resource type="Gradient" id="Gradient_vtpug"]
+offsets = PackedFloat32Array(0, 0.361868, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.968872, 0.968872, 0.968872, 1, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_bhlxw"]
+offsets = PackedFloat32Array(0, 0.319066)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_twhka")
@@ -59,5 +66,18 @@ shape = SubResource("RectangleShape2D_vtpug")
 [node name="Timer" type="Timer" parent="PlayerBullet"]
 wait_time = 6.0
 autostart = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="PlayerBullet"]
+position = Vector2(-60, 0)
+direction = Vector2(-180, 0)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 200.0
+scale_amount_max = 10.0
+color = Color(0.839355, 0.080788, 0.585315, 1)
+color_ramp = SubResource("Gradient_vtpug")
+color_initial_ramp = SubResource("Gradient_bhlxw")
+hue_variation_min = 0.1
+hue_variation_max = 0.94
 
 [connection signal="timeout" from="PlayerBullet/Timer" to="." method="_on_timer_timeout"]
